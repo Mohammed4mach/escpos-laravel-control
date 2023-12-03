@@ -1,0 +1,19 @@
+{
+  "name": "left-rhythm-bite-067t1",
+  "productName": "left-rhythm-bite-067t1",
+  "description": "My Electron application description",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "moha4mach",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "execa": "^8.0.1",
+    "get-bin-path": "^11.0.0"
+  },
+  "devDependencies": {
+    "electron": "27.0.4"
+  }
+}
