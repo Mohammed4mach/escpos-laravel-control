@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "execa": "^8.0.1",
-    "get-bin-path": "^11.0.0"
+    "get-bin-path": "^11.0.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "electron": "27.0.4"
+    "electron": "27.0.4",
+    "electron-installer-windows": "^3.0.0"
   }
 }

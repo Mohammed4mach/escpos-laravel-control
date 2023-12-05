@@ -1,19 +1,21 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Tray, nativeImage } = require('electron')
+const { app, BrowserWindow, Tray, nativeImage, ipcMain  } = require('electron')
 const path = require('node:path')
 
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 300,
-    height: 400,
+    width: 380,
+    height: 532,
     frame: false,
     resizable: false,
-    show: false,
+    show: true,
     title: 'EscPos Laravel Control',
 
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false,
     }
   })
 
@@ -35,6 +37,11 @@ function createWindow() {
 
   tray.setTitle('EscPos');
   tray.setToolTip('EscPos Laravel Control')
+}
+
+function assignHandlers()
+{
+
 }
 
 app.whenReady().then(() => {

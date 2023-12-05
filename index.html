@@ -2,18 +2,42 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>EscPos Laravel Control</title>
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    <header class="header">
+      <section class="window-ctrl flex">
+        <h2 class="title">
+          EscPos Agent
+        </h2>
+        <button class="window-ctrl__btn window-ctrl__btn--min flex-center">—</button>
+        <button class="window-ctrl__btn window-ctrl__btn--close flex-center">x</button>
+      </section>
+    </header>
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
+    <main>
+      <section class="prntrs">
+        <section class="prntr flex-col">
+          <label class="prntr__lbl">Receipt Printer</label>
+          <input class="prntr__input" placeholder="Receipt Printer sharename"/>
+        </section>
+        <section class="prntr flex-col">
+          <label class="prntr__lbl">Barcode Printer</label>
+          <input class="prntr__input" placeholder="Barcode Printer sharename" />
+        </section>
+      </section>
+
+      <section class="server-ctrl flex-center w-full">
+        <section
+          tabindex="1"
+          class="server-ctrl__btn server-ctrl__btn--stop"
+        >
+        </section>
+      </section>
+    </main>
+
+    <script src="./js/script.js"></script>
   </body>
 </html>
