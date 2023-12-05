@@ -1,5 +1,10 @@
 const ipcRenderer = require('electron').ipcRenderer;
+
 const serverBtn   = document.querySelector('.server-ctrl__btn');
+const btnClose    = document.querySelector('.window-ctrl__btn--close');
+const btnMin      = document.querySelector('.window-ctrl__btn--min');
+const receipt     = document.querySelector('.prntr__input--receipt');
+const barcode     = document.querySelector('.prntr__input--barcode');
 
 document.onkeydown = (key) => {
   if(key.code == 'Space')
@@ -49,4 +54,12 @@ ipcRenderer.on('server:stop', function() {
 serverBtn.onclick = () => {
   ipcRenderer.send('server:toggle');
 }
+
+btnClose.onclick = () => {
+  ipcRenderer.send('window:close');
+};
+
+btnMin.onclick = () => {
+  ipcRenderer.send('window:min');
+};
 

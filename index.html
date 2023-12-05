@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'http://localhost:12354'"> -->
     <title>EscPos Laravel Control</title>
     <link rel="stylesheet" href="css/main.css">
   </head>
@@ -17,15 +18,15 @@
       </section>
     </header>
 
-    <main>
+    <main class="flex-center">
       <section class="prntrs">
         <section class="prntr flex-col">
           <label class="prntr__lbl">Receipt Printer</label>
-          <input class="prntr__input" placeholder="Receipt Printer sharename"/>
+          <input class="prntr__input prntr__input--receipt" placeholder="Receipt Printer sharename"/>
         </section>
         <section class="prntr flex-col">
           <label class="prntr__lbl">Barcode Printer</label>
-          <input class="prntr__input" placeholder="Barcode Printer sharename" />
+          <input class="prntr__input prntr__input--barcode" placeholder="Barcode Printer sharename" />
         </section>
       </section>
 

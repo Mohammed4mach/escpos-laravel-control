@@ -1,8 +1,10 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Tray, nativeImage, ipcMain  } = require('electron')
+const { app, BrowserWindow, Tray, nativeImage, ipcMain, session } = require('electron')
 const path = require('node:path')
+const EscposServer = require('./js/models/EscposServer.cjs')
 
-function createWindow() {
+
+async function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 380,
@@ -16,6 +18,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
       contextIsolation: false,
+      allowRunningInsecureContent: true
     }
   })
 
@@ -37,18 +40,37 @@ function createWindow() {
 
   tray.setTitle('EscPos');
   tray.setToolTip('EscPos Laravel Control')
+
+  ipcMain.on('server:toggle', () => EscposServer.toggle(mainWindow));
+  ipcMain.on('window:min', () => mainWindow.hide());
+  ipcMain.on('window:close', async () => {
+    if(EscposServer.runing)
+      await EscposServer.stop(mainWindow);
+
+    setTimeout(() => mainWindow.close(), 1000);
+  });
 }
 
-function assignHandlers()
-{
+app.whenReady().then(async () => {
+  await createWindow()
 
-}
+  app.on('activate', async function() {
+    if (BrowserWindow.getAllWindows().length === 0) await createWindow()
+  })
 
-app.whenReady().then(() => {
-  createWindow()
-
-  app.on('activate', function() {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': '*'
+        // [
+          // "default-src ''",
+          // "script-src 'self'",
+          // "script-src-elem 'self'",
+          // "style-src-elem 'self'"
+        // ]
+      }
+    })
   })
 })
 
